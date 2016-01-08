@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  var url = 'http://api.wordnik.com:80/v4/word.json/' + req.query.data + '/relatedWords?useCanonical=false&relationshipTypes=synonym&limitPerRelationshipType=10&api_key=' + process.env.WORDNIK_API_KEY
+  var url = `http://api.wordnik.com:80/v4/word.json/${req.query.data}/relatedWords?useCanonical=false&relationshipTypes=synonym&limitPerRelationshipType=10&api_key=${process.env.WORDNIK_API_KEY}`
   request(url, (err, response, body) => {
     if (!err && response.statusCode == 200) {
       console.log(body)

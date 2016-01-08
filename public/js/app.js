@@ -1,4 +1,29 @@
 'use strict'
+
+const Smithy = React.createClass({
+  dsiplayName: "Smithy",
+
+  getInitialState: function() {
+    return { data: []};
+  },
+
+  handleSubmit: function(data) {
+    $.get('/test', { data: data.data }).done(function(data) {
+      this.setState({ data: JSON.parse(data)})
+    }.bind(this));
+  },
+
+  render: function() {
+    return (
+      <div className="smithy">
+        <h1>Craft Tweet</h1>
+        <Results data={this.state.data} />
+        <SmithyForm onSubmit={this.handleSubmit} />
+      </div>
+    )
+  }
+})
+
 const SmithyForm = React.createClass({
   displayName: "SmithyForm",
 
@@ -12,23 +37,48 @@ const SmithyForm = React.createClass({
 
   handleSubmit: function(event) {
     event.preventDefault();
-    this.setState({value: ''});
+    var tweet = this.state.value.trim();
+    this.props.onSubmit({ data: tweet });
 
-    $.get('/test', { data: this.state.value }).done(function(data) {
-      console.log(data)
-    });
+    this.setState({value: ''});
   },
 
   render: function() {
     var placeholder = this.state.placeholder;
     var value = this.state.value;
     return (
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder={placeholder} value={value} onChange={this.handleChange} />
-          <button> smithy</button>
-        </form>
+      <form className="smithyForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder={placeholder} value={value} onChange={this.handleChange} />
+        <button>smithy</button>
+      </form>
     );
   }
 })
 
-ReactDOM.render(<SmithyForm />, document.body )
+const Results = React.createClass({
+  render: function() {
+
+    var synonyms = this.props.data.map(function(word) {
+      var drilledSynonyms = word.words.map(function(syn) {
+
+        return (
+            <div className="results">
+              <h4 className={syn}>
+                {syn}
+              </h4>
+            </div>
+        );
+      })
+
+      return drilledSynonyms
+    });
+
+    return (
+      <div className="synonymList">
+        {synonyms}
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(<Smithy />, document.getElementsByClassName('container')[0])
