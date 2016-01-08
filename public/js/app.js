@@ -13,7 +13,8 @@ const SmithyForm = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
     this.setState({value: ''});
-    $.post('/test', { data: this.state.value }).done(function(data) {
+
+    $.get('/test', { data: this.state.value }).done(function(data) {
       console.log(data)
     });
   },
