@@ -8,7 +8,7 @@ const Smithy = React.createClass({
   },
 
   handleSubmit: function(data) {
-    $.get('/test', { data: data.data }).done(function(data) {
+    $.get('/get-synonyms', { data: data.data }).done(function(data) {
       this.setState({ data: JSON.parse(data)})
     }.bind(this));
   },
@@ -17,8 +17,8 @@ const Smithy = React.createClass({
     return (
       <div className="smithy">
         <h1>Craft Tweet</h1>
-        <Results data={this.state.data} />
         <SmithyForm onSubmit={this.handleSubmit} />
+        <Results data={this.state.data} />
       </div>
     )
   }
@@ -57,7 +57,6 @@ const SmithyForm = React.createClass({
 
 const Results = React.createClass({
   render: function() {
-
     var synonyms = this.props.data.map(function(word) {
       var drilledSynonyms = word.words.map(function(syn) {
 
