@@ -1,7 +1,7 @@
 'use strict'
 
 const Smithy = React.createClass({
-  dsiplayName: "Smithy",
+  displayName: "Smithy",
 
   getInitialState: function() {
     return { data: []};
@@ -69,22 +69,22 @@ const Results = React.createClass({
 
     return (
         <div className="results">
-         {
-           Object.keys(words).map(function(value) {
-             return (
-          <div className={value}>
-            <h4>{ value }</h4>
-            <ul>
-             {
-              words[value].map(function(syn) {
-                return <SynonymElement data={syn} />
-              })
-             }
-            </ul>
-          </div>
-          )
+        {
+          Object.keys(words).map(function(value) {
+            return (
+              <div className={value}>
+                <h4>{ value }</h4>
+                  <ul>
+                  {
+                    words[value].map(function(syn) {
+                      return <SynonymElement data={syn} />
+                    })
+                  }
+                  </ul>
+              </div>
+            )
           })
-         }
+        }
       </div>
     )
   }
