@@ -55,30 +55,39 @@ const SmithyForm = React.createClass({
   }
 })
 
+const SynonymElement = React.createClass({
+  render: function() {
+    return (
+        <li>{this.props.data}</li>
+    )
+  }
+})
+
 const Results = React.createClass({
   render: function() {
-    debugger
-    var synonyms = this.props.data.map(function(word) {
-      var drilledSynonyms = word.words.map(function(syn) {
-
-        return (
-            <div className="results">
-              <h4 className={syn}>
-                {syn}
-              </h4>
-            </div>
-        );
-      })
-
-      return drilledSynonyms
-    });
+    var words = this.props.data;
 
     return (
-      <div className="synonymList">
-        {synonyms}
+        <div className="results">
+         {
+           Object.keys(words).map(function(value) {
+             return (
+          <div className={value}>
+            <h4>{ value }</h4>
+            <ul>
+             {
+              words[value].map(function(syn) {
+                return <SynonymElement data={syn} />
+              })
+             }
+            </ul>
+          </div>
+          )
+          })
+         }
       </div>
-    );
+    )
   }
-});
+})
 
 ReactDOM.render(<Smithy />, document.getElementsByClassName('container')[0])
