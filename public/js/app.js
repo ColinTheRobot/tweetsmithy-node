@@ -33,7 +33,12 @@ const SmithyForm = React.createClass({
 
   handleChange: function(event) {
     this.setState({value: event.target.value});
+    this.setState({fixedValue: event.target.value});
   },
+  
+  // setOutput: function(event) {
+  //   return event.target.value
+  // }
 
   handleSubmit: function(event) {
     event.preventDefault();
@@ -46,8 +51,10 @@ const SmithyForm = React.createClass({
   render: function() {
     var placeholder = this.state.placeholder;
     var value = this.state.value;
+    var fixedValue = this.state.fixedValue;
     return (
       <form className="smithyForm" onSubmit={this.handleSubmit}>
+        <OutputElement data={fixedValue} />
         <input type="text" placeholder={placeholder} value={value} onChange={this.handleChange} />
         <button>smithy</button>
       </form>
@@ -55,10 +62,30 @@ const SmithyForm = React.createClass({
   }
 })
 
+const OutputElement = React.createClass({
+  getInitialSate: function() {
+    return {
+      value: ''
+    }
+  },
+
+  render: function() {
+    var value = this.props.data
+    return (
+        <p>{value}</p>
+    );
+  }
+})
+
+
 const SynonymElement = React.createClass({
+  replace: function(event) {
+    console.log(event.target.value)
+  },
+
   render: function() {
     return (
-        <li>{this.props.data}</li>
+        <li onClick={this.replace}>{this.props.data}: {this.props.data.length}</li>
     )
   }
 })
