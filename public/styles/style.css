@@ -1,0 +1,23 @@
+.smithy {
+  text-align: center;
+  padding-top 20px;
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+ul, li {
+  list-style: none;
+  list-style-position:inside;
+  margin:0;
+  padding:0;
+}
+
+.char-length {
+  font-size: 8px;
+  vertical-align: super;
+}
