@@ -20,38 +20,31 @@ app.get('/', (req, res) => {
 
 app.get('/get-synonyms', (req, res) => {
   var tweetWords = sanitizeTweet(req.query.data);
-
-  getDefs(tweetWords)
-    .then(function(result) {
-      res.send(result)
-    });
+  getDefs(tweetWords, res)
 });
 
-var getDefs = function(tweetWords) {
-  return new Promise(function(resolve) {
+var getDefs = function(tweetWords, res) {
     var i = 0;
     var serialized = {};
 
-    tweetWords.forEach(function(word) {
-      wordnikClient(word, function(body) {
-        var word = tweetWords[i];
+    tweetWords.forEach((word) => {
+      wordnikClient(word, (body) => {
+        var wordToFind = word;
         var shortenedWords = [];
         i++
 
         if (body[0]) {
-          console.log(body)
-         shortenedWords = _.filter(body, function(syn) {
-           return syn.length < word.length
-          })
-          serialized[word] = shortenedWords
+         shortenedWords = _.filter(body, (syn) => {
+           return syn.length < wordToFind.length
+         });
+          serialized[wordToFind] = shortenedWords
         }
 
         if (tweetWords.length == i) {
-          resolve(serialized)
+          res.send(serialized)
         }
       });
-    })
-  })
+    });
 }
 
 var sanitizeTweet = function(tweet) {
@@ -63,18 +56,16 @@ var sanitizeTweet = function(tweet) {
 
 var wordnikClient = function(word, callback) {
   var url = `http://api.wordnik.com:80/v4/word.json/${word}/relatedWords?useCanonical=false&relationshipTypes=synonym&limitPerRelationshipType=10&api_key=${process.env.WORDNIK_API_KEY}`
+
   request(url, (err, response, body) => {
     if (!err && response.statusCode == 200 && response.body != '[]') {
       callback(JSON.parse(body)[0].words)
     } else if (!err && response.statusCode == 200 && response.body == '[]') {
       callback([false])
     }
-  })
+  });
 }
 
 var port = process.env.PORT || 3000;
 
-var server = app.listen(port, () => {
-  var host = server.address().address;
-  // var port = server.address().port;
-});
+var server = app.listen(port);
