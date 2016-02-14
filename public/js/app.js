@@ -79,39 +79,60 @@ const OutputElement = React.createClass({
 
 const SynonymElement = React.createClass({
   replace : function(event) {
+    // debugger
     this.props.swapWord(this.props.data, this.props.keyWord )
   },
 
   render : function() {
+    // console.log(this.props)
     return (
-      <li onClick={this.replace}>{this.props.data}: {this.props.data.length}</li>
+       <li onClick={this.replace}>{this.props.data}: {this.props.data.length}</li>
     )
   }
 })
 
+
+const IndividualResult = React.createClass({
+  renderSynElements : function(syn) {
+    var swapWord = this.props.swapWord;
+    var word = Object.keys(this.props.synonyms)[0];
+
+    return <SynonymElement data={syn} keyWord={word} swapWord={swapWord} />
+  },
+
+  render : function() {
+    // var swapWord = this.props.swapWord;
+    var index = this.props.index;
+    var word = Object.keys(this.props.synonyms)[0];
+    // debugger
+    var synonyms = this.props.synonyms[word];
+
+    return (
+      <div className={index}>
+        <h4>{word}</h4>
+          <ul>
+          {
+            synonyms.map(this.renderSynElements)
+          }
+          </ul>
+      </div>
+    )
+  }
+})
+
+
 const Results = React.createClass({
+  renderIndividualResults : function(key) {
+    return <IndividualResult key={key} index={key} synonyms={this.props.data[key]} swapWord={this.props.swapWord} />
+  },
   render : function() {
     var words = this.props.data;
-    var swapWord = this.props.swapWord
     return (
         <div className="results">
         {
-          Object.keys(words).map(function(value) {
-            return (
-              <div className={value}>
-                <h4>{ value }</h4>
-                  <ul>
-                  {
-                    words[value].map(function(syn) {
-                      return <SynonymElement data={syn} keyWord={value} swapWord={swapWord} />
-                    })
-                  }
-                  </ul>
-              </div>
-            )
-          })
+          Object.keys(words).map(this.renderIndividualResults)
         }
-      </div>
+        </div>
     )
   }
 })

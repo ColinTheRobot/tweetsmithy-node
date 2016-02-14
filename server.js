@@ -28,31 +28,26 @@ app.get('/get-synonyms', (req, res) => {
 });
 
 var getDefs = function(tweetWords, res) {
-    var i = 0;
-    var serialized = {};
-    var tweetWords = tweetWords || ['a']
+  var i = 0;
+  var serialized = {};
+  var tweetWords = tweetWords || ['a']
 
-    Promise.all(tweetWords.map((word) => wordnikClient(word, wordnikCallback)))
-      .then(serialized => res.send(serialized))
-      .catch(err  => res.status(500).send('wattt'))
+  Promise.all(tweetWords.map((word) => wordnikClient(word, wordnikCallback)))
+    .then(serialized => res.send(serialized))
+    .catch(err => res.status(500).send('wattt'))
 }
 
-var wordnikCallback = function(body) {
-  var wordToFind = word;
+var wordnikCallback = function(word, body) {
   var shortenedWords = [];
-  i++
+  var serialized = {};
 
   if (body[0]) {
    shortenedWords = _.filter(body, (syn) => {
-     return syn.length < wordToFind.length
+     return syn.length < word.length
    });
-    serialized[wordToFind] = shortenedWords
+    serialized[word] = shortenedWords
   }
-  console.log(serialized)
-
-  // if (tweetWords.length == i) {
-  //   res.send(serialized)
-  // }
+  return serialized
 };
 
 var sanitizeTweet = function(tweet) {
@@ -68,7 +63,9 @@ var wordnikClient = function(word, callback) {
   return new Promise( (resolve, reject) => {
         request(url, (err, response, body) => {
           if (!err && response.statusCode == 200 && response.body != '[]') {
-              resolve(JSON.parse(body)[0].words);
+              // console.log(JSON.parse(body))
+              // console.log(word)
+              resolve(callback(word, JSON.parse(body)[0].words));
           } else if (!err && response.statusCode == 200 && response.body == '[]') {
               reject([false]);
           }
