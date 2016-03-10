@@ -1,5 +1,12 @@
 'use strict'
+var $ = require('jquery');
+var React = require('react');
+var ReactDOM = require('react-dom');
+// var $ = require('jquery');
 
+const OutputElement =  require('./output_element')
+const SmithyForm = require('./smithy_form')
+const Results = require('./results')
 
 const App = React.createClass({
   getInitialState: function() {
@@ -50,90 +57,11 @@ const App = React.createClass({
   }
 })
 
-const SmithyForm = React.createClass({
-  handleSubmit : function(event) {
-    event.preventDefault();
-
-    this.props.getSynonyms({ data: this.refs.tweet.value });
-  },
-
-  render : function() {
-    return (
-      <form className="smithyForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="tweet" ref="tweet" />
-        <button>smithy</button>
-      </form>
-    );
-  }
-})
-
-const OutputElement = React.createClass({
-  render : function() {
-    var value = this.props.data
-    return (
-        <p>{value}</p>
-    );
-  }
-})
+// module.exports = App;
 
 
-const SynonymElement = React.createClass({
-
-  replace : function(event) {
-    this.props.swapWord(this.props.data, this.props.keyWord )
-  },
-
-  render : function() {
-    var style = {cursor: "alias", marginBottom: "10px"}
-    return (
-       <li style={style} onClick={this.replace}>{this.props.data}: {this.props.data.length}</li>
-    )
-  }
-})
 
 
-const IndividualResult = React.createClass({
-  renderSynElements : function(syn) {
-    var swapWord = this.props.swapWord;
-    var word = Object.keys(this.props.synonyms)[0];
-
-    return <SynonymElement data={syn} keyWord={word} swapWord={swapWord} />
-  },
-
-  render : function() {
-    var index = this.props.index;
-    var word = Object.keys(this.props.synonyms)[0];
-    var synonyms = this.props.synonyms[word];
-
-    return (
-      <div className={index}>
-        <h4>{word}</h4>
-          <ul>
-          {
-            synonyms.map(this.renderSynElements)
-          }
-          </ul>
-      </div>
-    )
-  }
-})
 
 
-const Results = React.createClass({
-  renderIndividualResults : function(key) {
-    return <IndividualResult key={key} index={key} synonyms={this.props.data[key]} swapWord={this.props.swapWord} />
-  },
-
-  render : function() {
-    var words = this.props.data;
-    return (
-        <div className="results">
-        {
-          Object.keys(words).map(this.renderIndividualResults)
-        }
-        </div>
-    )
-  }
-})
-
-ReactDOM.render(<App />, document.getElementsByClassName('container')[0])
+ReactDOM.render(<App />, document.getElementById('container'))
