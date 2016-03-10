@@ -57,11 +57,4 @@ const App = React.createClass({
   }
 })
 
-// module.exports = App;
-
-
-
-
-
-
 ReactDOM.render(<App />, document.getElementById('container'))

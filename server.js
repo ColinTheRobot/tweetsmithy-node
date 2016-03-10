@@ -13,11 +13,6 @@ app.use(morgan('short'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('./public'))
-// app.use('/scripts', express.static(__dirname + './node_modules/react/'));
-// app.use('/scripts', express.static(__dirname + './node_modules/react-dom/'));
-
-
-// const Promise = require('./promise.js')
 
 app.get('/', (req, res) => {
 });
