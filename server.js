@@ -9,7 +9,7 @@ const _ = require('underscore');
 
 dotenv.load();
 
-app.use(morgan('combined'));
+app.use(morgan('short'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('./public'))
@@ -34,7 +34,7 @@ var getDefs = function(tweetWords, res) {
 
   Promise.all(tweetWords.map((word) => wordnikClient(word, wordnikCallback)))
     .then(serialized => res.send(serialized))
-    .catch(err => res.status(500).send('wattt'))
+    .catch(err => res.status(500).send(err))
 }
 
 var wordnikCallback = function(word, body) {
