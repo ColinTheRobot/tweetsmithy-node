@@ -78,13 +78,15 @@ const OutputElement = React.createClass({
 
 
 const SynonymElement = React.createClass({
+
   replace : function(event) {
     this.props.swapWord(this.props.data, this.props.keyWord )
   },
 
   render : function() {
+    var style = {cursor: "alias", margin-bottom: "10px"}
     return (
-       <li onClick={this.replace}>{this.props.data}: {this.props.data.length}</li>
+       <li style={style} onClick={this.replace}>{this.props.data}: {this.props.data.length}</li>
     )
   }
 })
