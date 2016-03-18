@@ -2,11 +2,13 @@
 var $ = require('jquery');
 var React = require('react');
 var ReactDOM = require('react-dom');
-// var $ = require('jquery');
+
 
 const OutputElement =  require('./output_element')
 const SmithyForm = require('./smithy_form')
 const Results = require('./results')
+
+const AppBar = require('material-ui/lib/app-bar');
 
 const App = React.createClass({
   getInitialState: function() {
@@ -48,7 +50,7 @@ const App = React.createClass({
   render: function() {
     return (
       <div className="smithy">
-        <h1>Craft Tweet</h1>
+        <AppBar showMenuIconButton={false}/>
         <OutputElement data={this.state.tweet} />
         <SmithyForm getSynonyms={this.getSynonyms} />
         <Results data={this.state.data} swapWord={this.swapWord} />
