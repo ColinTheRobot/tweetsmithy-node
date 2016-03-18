@@ -47,8 +47,8 @@ var wordnikCallback = function(word, body) {
 
 var sanitizeTweet = function(tweet) {
   var downcasedString = tweet.toLowerCase();
-  var punctuationless = downcasedString.replace(/[.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-  var finalString = punctuationless.replace(/\s{2,}/g," ");
+  var punctuationless = downcasedString.replace(/\W+/g, ' ');
+  var finalString = punctuationless.replace(/\s{2,}/g, ' ');
   return finalString.split(' ')
 }
 

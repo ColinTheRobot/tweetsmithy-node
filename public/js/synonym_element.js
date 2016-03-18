@@ -9,7 +9,7 @@ const SynonymElement = React.createClass({
   render : function() {
     var style = {cursor: "alias", marginBottom: "10px"}
     return (
-       <li style={style} onClick={this.replace}>{this.props.data}: {this.props.data.length}</li>
+       <li style={style} onClick={this.replace}>{this.props.data}</li>
     )
   }
 })

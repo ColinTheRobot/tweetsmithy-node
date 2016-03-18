@@ -32,7 +32,7 @@ const SmithyForm = React.createClass({
     var pStyle = { display: 'inline-block', fontSize: '8px', verticalAlign: 'bottom' }
 
     return (
-      <form className="smithyForm" onSubmit={this.handleSubmit}>
+      <form className="smithyForm" >
         <TextField style={textFieldStyle} multiLine={true} value={this.state.textFieldValue} onChange={this._handleTextFieldChange} placeholder="craft tweet" />
         <p style={pStyle}> {this.state.chars_left}</p>
         <RaisedButton label="Smithy" style={buttonStyle} onClick={this.handleSubmit} />

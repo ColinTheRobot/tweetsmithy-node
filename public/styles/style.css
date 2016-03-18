@@ -1,13 +1,31 @@
+body {
+  color: #444;
+}
+
 .smithy {
   text-align: center;
   padding-top 20px;
 }
 
 .results {
+  padding-top: 60px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.results p {
+  font-weight: bold;
+}
+
+.output {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: normal;
+  font-size: 21px;
+  text-shadow: 2px 2px 9px rgba(0,0,0,0.3);
+  letter-spacing: 1px;
+  display: inline;
 }
 
 ul, li {
