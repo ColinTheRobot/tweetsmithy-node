@@ -3,7 +3,6 @@ var $ = require('jquery');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-
 const OutputElement =  require('./output_element')
 const SmithyForm = require('./smithy_form')
 const Results = require('./results')
@@ -51,8 +50,8 @@ const App = React.createClass({
     return (
       <div className="smithy">
         <AppBar showMenuIconButton={false}/>
-        <OutputElement data={this.state.tweet} />
         <SmithyForm getSynonyms={this.getSynonyms} />
+        <OutputElement data={this.state.tweet} />
         <Results data={this.state.data} swapWord={this.swapWord} />
       </div>
     )

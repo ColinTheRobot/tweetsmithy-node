@@ -17,7 +17,7 @@ const IndividualResult = React.createClass({
 
     return (
       <div className={index}>
-        <h4>{word}</h4>
+        <p>{word}</p>
           <ul>
           {
             synonyms.map(this.renderSynElements)
