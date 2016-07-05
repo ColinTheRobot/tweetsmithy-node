@@ -9,7 +9,7 @@ Not yet complete:
 - Authentication with Twitter
 - Ability to tweet after replacing words
 
-Api limitations:
+API limitations:
 
 Wordnik API returns a 500 when it receives too many requests. TweetSmithy is unable to make requests for multiple words consecutively. As of yet there is no way to make batch requests for synonyms of multiple words.
 
