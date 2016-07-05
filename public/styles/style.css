@@ -4,11 +4,12 @@ body {
 
 .smithy {
   text-align: center;
+  padding-top: 6px;
   padding-top 20px;
 }
 
 .results {
-  padding-top: 60px;
+  padding-top: 55px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

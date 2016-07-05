@@ -1,7 +1,7 @@
 'use strict'
-var $ = require('jquery');
-var React = require('react');
-var ReactDOM = require('react-dom');
+const $ = require('jquery');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 const OutputElement =  require('./output_element')
 const SmithyForm = require('./smithy_form')

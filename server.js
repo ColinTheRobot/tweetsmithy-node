@@ -25,7 +25,7 @@ app.get('/get-synonyms', (req, res) => {
 var getDefs = function(tweetWords, res) {
   var i = 0;
   var serialized = {};
-  var tweetWords = tweetWords || ['a']
+  var tweetWords = tweetWords || ['a'];
 
   Promise.all(tweetWords.map((word) => wordnikClient(word, wordnikCallback)))
     .then(serialized => res.send(serialized))
@@ -49,6 +49,7 @@ var sanitizeTweet = function(tweet) {
   var downcasedString = tweet.toLowerCase();
   var punctuationless = downcasedString.replace(/\W+/g, ' ');
   var finalString = punctuationless.replace(/\s{2,}/g, ' ');
+
   return finalString.split(' ')
 }
 
@@ -58,8 +59,6 @@ var wordnikClient = function(word, callback) {
   return new Promise( (resolve, reject) => {
         request(url, (err, response, body) => {
           if (!err && response.statusCode == 200 && response.body != '[]') {
-              // console.log(JSON.parse(body))
-              // console.log(word)
               resolve(callback(word, JSON.parse(body)[0].words));
           } else if (!err && response.statusCode == 200 && response.body == '[]') {
               reject([false]);

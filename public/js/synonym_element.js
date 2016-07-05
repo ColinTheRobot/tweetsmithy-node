@@ -1,9 +1,9 @@
 'use strict'
-var React = require('react');
+const React = require('react');
 
 const SynonymElement = React.createClass({
   replace : function(event) {
-    this.props.swapWord(this.props.data, this.props.keyWord )
+    this.props.swapWord(this.props.data, this.props.keyWord)
   },
 
   render : function() {

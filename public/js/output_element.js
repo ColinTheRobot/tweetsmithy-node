@@ -1,5 +1,5 @@
 'use strict'
-var React = require('react');
+const React = require('react');
 
 const OutputElement = React.createClass({
   render : function() {

@@ -1,5 +1,5 @@
 'use strict'
-var React = require('react');
+const React = require('react');
 const IndividualResult = require('./individual_result');
 
 const Results = React.createClass({

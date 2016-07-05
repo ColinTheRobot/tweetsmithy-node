@@ -1,5 +1,5 @@
 'use strict'
-var React = require('react');
+const React = require('react');
 
 const RaisedButton = require('material-ui/lib/raised-button');
 const TextField = require('material-ui/lib/text-field');

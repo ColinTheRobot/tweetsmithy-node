@@ -1,5 +1,5 @@
 'use strict'
-var React = require('react');
+const React = require('react');
 const SynonymElement = require('./synonym_element');
 
 const IndividualResult = React.createClass({
