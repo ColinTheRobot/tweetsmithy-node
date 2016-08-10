@@ -1,5 +1,7 @@
 # TweetSmithy
 
+https://murmuring-coast-23514.herokuapp.com/
+
 Uses the Wordnik API to return shorter synonyms for the words input into the smithy form.
 
 Goal: Provide a UI for live tweeting that will ease the process of fitting tweets into the character limit by allowing the user to quickly swap words for shorter synonyms.
